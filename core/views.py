@@ -12,3 +12,7 @@ def home(request):
         return redirect('home')
     forms = SurveyForm()
     return render(request, 'core/home.html', {'forms':forms})
+
+def list_survey(request):
+    surveys = Survey.objects.all()
+    return render(request, 'core/list-survey.html', {'surveys':surveys})

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} list survey {% endblock %}
+
+{% block content %}
+<ul>
+    {% for survey in surveys %}
+    <li>
+        <p>{{ survey.full_name }}</p>
+        <p>{{ survey.email }}</p>
+        <p>{{ survey.phone }}</p>
+        <p>{{ survey.sex }}</p>
+        <p>{{ survey.languagen }}</p>
+        <p>{{ survey.description }}</p>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
