@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SurveyForm
 from .models import Survey
 
@@ -19,3 +19,11 @@ def list_survey(request):
     return render(
         request, 'core/list-survey.html', 
         {'surveys':surveys, 'all_surveys': len(surveys)})
+
+def deyail_survey(request, pk):
+    survey = get_object_or_404(Survey,pk=pk)
+    
+    return render(
+        request, 'core/detail-survey.html', 
+        {'survey':survey })
+    

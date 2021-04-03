@@ -10,7 +10,7 @@
 
     {% for survey in surveys %}
     <button type="button" class="list-group-item list-group-item-action">
-        <h5>{{ survey.full_name }}</h5>
+        <a href="{% url 'detail-survey' survey.id %}"><h5>{{ survey.full_name }}</h5></a>
         <p>{{ survey.email }}</p>
     </button>
     {% endfor %}
