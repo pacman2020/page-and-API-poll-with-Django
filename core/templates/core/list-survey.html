@@ -2,20 +2,18 @@
 {% block title %} list survey {% endblock %}
 
 {% block content %}
-<h2 class="text-center mt-1" >lista de todas as pesquisa</h2>
-<span>total de escriçoes <span class="badge bg-primary rounded-pill">{{ all_surveys }}</span></span>
-<ul>
+<h4 class="text-center mt-3" >total de escriçoes 
+    <span class="badge bg-primary rounded-pill">{{ all_surveys }}</span>
+</h4>
+
+<div class="list-group mt-2">
+
     {% for survey in surveys %}
-    <li>
-        <p>{{ survey.full_name }}</p>
+    <button type="button" class="list-group-item list-group-item-action">
+        <h5>{{ survey.full_name }}</h5>
         <p>{{ survey.email }}</p>
-        <p>{{ survey.phone }}</p>
-        <p>{{ survey.sex }}</p>
-        <p>{{ survey.languagen }}</p>
-        <p>{{ survey.description }}</p>
-    </li>
-    <hr>
+    </button>
     {% endfor %}
-</ul>
+</div>
 
 {% endblock %}
