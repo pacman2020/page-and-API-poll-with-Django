@@ -15,4 +15,7 @@ def home(request):
 
 def list_survey(request):
     surveys = Survey.objects.all()
-    return render(request, 'core/list-survey.html', {'surveys':surveys})
+    
+    return render(
+        request, 'core/list-survey.html', 
+        {'surveys':surveys, 'all_surveys': len(surveys)})

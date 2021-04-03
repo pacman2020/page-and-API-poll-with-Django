@@ -2,6 +2,8 @@
 {% block title %} list survey {% endblock %}
 
 {% block content %}
+<h2 class="text-center mt-1" >lista de todas as pesquisa</h2>
+<span>total de escriçoes <span class="badge bg-primary rounded-pill">{{ all_surveys }}</span></span>
 <ul>
     {% for survey in surveys %}
     <li>
@@ -12,6 +14,7 @@
         <p>{{ survey.languagen }}</p>
         <p>{{ survey.description }}</p>
     </li>
+    <hr>
     {% endfor %}
 </ul>
 
