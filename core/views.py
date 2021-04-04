@@ -1,10 +1,13 @@
+from django.core import paginator
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SurveyForm
 from .models import Survey
+from django.core.paginator import Paginator
 
 
 #filros survey
 #priva rotas deletar, update, list, detail
+#paginação
 
 def home(request):
     if request.method == 'POST':
@@ -18,18 +21,27 @@ def home(request):
 def list_survey(request):
     if request.method == 'POST':
         search = request.POST.get('search')
-        print('----', search)
         
         if search:
             surveys = Survey.objects.filter(full_name=search)
+            paginator = Paginator(surveys, 2)
+            page = request.GET.get('page')
+            data = {
+                'surveys': paginator.get_page(page),
+                'all_surveys': len(surveys)}
             return render(
                 request, 'core/list-survey.html', 
-                {'surveys':surveys, 'all_surveys': len(surveys)})
+                data)
     
     surveys = Survey.objects.all()
+    paginator = Paginator(surveys, 3)
+    page = request.GET.get('page')
+    data = {
+        'surveys': paginator.get_page(page),
+        'all_surveys': len(surveys)}
     return render(
         request, 'core/list-survey.html', 
-        {'surveys':surveys, 'all_surveys': len(surveys)})
+        data)
     
 
 def deyail_survey(request, pk):
