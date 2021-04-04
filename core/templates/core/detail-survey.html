@@ -13,7 +13,7 @@
         <p>{{ survey.languagem }}</p>
         <p>{{ survey.description }}</p>
         <p>
-            <a  href="#"><button class="btn btn-primary" >edit</button></a>
+            <a  href="{% url 'update-survey' survey.id %}"><button class="btn btn-primary" >edit</button></a>
             <a  href="#"><button class="btn btn-danger" >delete</button></a>
         </p>
     </button>
