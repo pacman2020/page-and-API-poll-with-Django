@@ -12,7 +12,6 @@ def home(request):
     if request.method == 'POST':
         form = SurveyForm(request.POST)
         if form.is_valid():
-            # new_survey = form.
             form.save()
         return redirect('home')
     forms = SurveyForm()
@@ -40,11 +39,15 @@ def update_survey(request, pk):
         if form.is_valid():
             # new_survey = form.
             form.save()
-        return redirect('home')
+        return redirect('detail-survey',  pk=survey.pk)
     
     forms = SurveyForm(instance=survey)
     return render(request, 'core/update-survey.html', {'forms':forms})
 
 def delete_survey(request, pk):
-    pass
+    survey = get_object_or_404(Survey,pk=pk)
     
+    if survey:
+        survey.delete()
+        return redirect('list-surveys')
+    return redirect('detail-survey',  pk=survey.pk)

@@ -9,7 +9,7 @@
 <div class="list-group mt-2">
 
     {% for survey in surveys %}
-    <button type="button" class="list-group-item list-group-item-action">
+    <button type="button" class="list-group-item list-group-item-action mt-3">
         <a href="{% url 'detail-survey' survey.id %}"><h5>{{ survey.full_name }}</h5></a>
         <p>{{ survey.email }}</p>
     </button>
