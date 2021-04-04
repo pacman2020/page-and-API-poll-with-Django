@@ -4,8 +4,6 @@ from .models import Survey
 
 
 #filros survey
-#update
-#delete
 #priva rotas deletar, update, list, detail
 
 def home(request):
@@ -18,11 +16,21 @@ def home(request):
     return render(request, 'core/home.html', {'forms':forms})
 
 def list_survey(request):
-    surveys = Survey.objects.all()
+    if request.method == 'POST':
+        search = request.POST.get('search')
+        print('----', search)
+        
+        if search:
+            surveys = Survey.objects.filter(full_name=search)
+            return render(
+                request, 'core/list-survey.html', 
+                {'surveys':surveys, 'all_surveys': len(surveys)})
     
+    surveys = Survey.objects.all()
     return render(
         request, 'core/list-survey.html', 
         {'surveys':surveys, 'all_surveys': len(surveys)})
+    
 
 def deyail_survey(request, pk):
     survey = get_object_or_404(Survey,pk=pk)
