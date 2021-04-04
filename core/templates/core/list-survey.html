@@ -14,6 +14,23 @@
         <p>{{ survey.email }}</p>
     </button>
     {% endfor %}
+
+    <!-- paginação -->
+    <div class="pagination d-flex justify-content-center p-3">
+        <span class="step-link">
+          {% if surveys.has_previous %}
+          <a href="?page={{ surveys.previous_page_number }}">voltar</a>
+          {% endif %}
+      
+          <span class="current">
+            {{ surveys.number }} | {{  surveys.paginator.num_pages }}
+          </span>
+      
+          {% if surveys.has_next %}
+          <a href="?page={{ surveys.next_page_number }}">proximo</a>
+          {% endif %}
+        </span>
+      </div>
 </div>
 
 {% endblock %}

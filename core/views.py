@@ -24,7 +24,7 @@ def list_survey(request):
         
         if search:
             surveys = Survey.objects.filter(full_name=search)
-            paginator = Paginator(surveys, 2)
+            paginator = Paginator(surveys, 100)
             page = request.GET.get('page')
             data = {
                 'surveys': paginator.get_page(page),
@@ -34,7 +34,7 @@ def list_survey(request):
                 data)
     
     surveys = Survey.objects.all()
-    paginator = Paginator(surveys, 3)
+    paginator = Paginator(surveys, 10)
     page = request.GET.get('page')
     data = {
         'surveys': paginator.get_page(page),
