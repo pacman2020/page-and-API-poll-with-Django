@@ -2,14 +2,17 @@
 {% block title %} list survey {% endblock %}
 
 {% block content %}
+
+<!-- informação do total de pesquisas -->
 <h4 class="text-center mt-3" >total de escriçoes 
     <span class="badge bg-primary rounded-pill">{{ all_surveys }}</span>
 </h4>
 
+<!-- filtro de linguagem -->
 <div class="list-group mt-2">
     <form action="{% url 'list-surveys' %}" method="POST">
       {% csrf_token %}
-      <select name="language" class="form-select" aria-label="Default select example">
+      <select  name="language" class="form-select" aria-label="Default select example">
         <option value="" selected>selecione uma liguagem</option>
         {% for language in filter_language %}
         <option value="{{language}}">
@@ -20,7 +23,7 @@
       <button class="btn btn-outline-success" type="submit">filtar</button>
     </form>
 
-
+    <!-- lista de pesquisa -->
     {% for survey in surveys %}
     <button type="button" class="list-group-item list-group-item-action mt-3">
         <a href="{% url 'detail-survey' survey.id %}"><h5>{{ survey.full_name }}</h5></a>
