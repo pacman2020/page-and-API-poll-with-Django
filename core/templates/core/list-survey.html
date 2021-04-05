@@ -4,15 +4,15 @@
 {% block content %}
 
 <!-- informação do total de pesquisas -->
-<h4 class="text-center mt-3" >total de escriçoes 
+<h4 class="text-center " >total de escriçoes 
     <span class="badge bg-primary rounded-pill">{{ all_surveys }}</span>
 </h4>
 
 <!-- filtro de linguagem -->
-<div class="list-group mt-2">
-    <form action="{% url 'list-surveys' %}" method="POST">
+<div class="list-group mt-1">
+    <form type="submit" action="{% url 'list-surveys' %}" method="POST">
       {% csrf_token %}
-      <select  name="language" class="form-select" aria-label="Default select example">
+      <select  name="language" >
         <option value="" selected>selecione uma liguagem</option>
         {% for language in filter_language %}
         <option value="{{language}}">
