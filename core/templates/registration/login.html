@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} login pet {% endblock %}
+{% block content %}
+<div class="p-5 d-flex justify-content-center mt-2">
+    <form  class="rounded" style="background-color: rgb(155, 161, 159);" method="POST">
+        {% csrf_token %}
+        <h2 class="p-3">Admin</h2>
+
+        <div class="p-4 d-flex flex-column">
+            <label for="">username</label>
+            {{ form.username }}
+            <label for="">password</label>
+            {{ form.password }}
+            <div class="pb-4 pt-4">
+                <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

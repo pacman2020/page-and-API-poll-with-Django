@@ -12,9 +12,15 @@
     <nav class="navbar navbar-expand-lg navbar-dark p-5 bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'home' %}">Survey Dev</a>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="collapse navbar-collapse" >
             <div class="navbar-nav">
               <a class="nav-link" href="{% url 'list-surveys' %}">list-survey</a>
+              {% if user.is_authenticated %}
+                <a class="nav-link" href="{% url 'logout' %}">logout</a>
+                {% else %}
+                <p class="text-white" >{{ user.username }}</p>
+                <a class="nav-link" href="{% url 'login' %}">login</a>
+              {% endif %}
               <a class="nav-link" href="#">about</a>
             </div>
           </div>
