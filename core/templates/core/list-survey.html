@@ -7,6 +7,19 @@
 </h4>
 
 <div class="list-group mt-2">
+    <form action="{% url 'list-surveys' %}" method="POST">
+      {% csrf_token %}
+      <select name="language" class="form-select" aria-label="Default select example">
+        <option value="" selected>selecione uma liguagem</option>
+        {% for language in filter_language %}
+        <option value="{{language}}">
+          {{language}}
+        </option>
+        {% endfor %}
+      </select>
+      <button class="btn btn-outline-success" type="submit">filtar</button>
+    </form>
+
 
     {% for survey in surveys %}
     <button type="button" class="list-group-item list-group-item-action mt-3">

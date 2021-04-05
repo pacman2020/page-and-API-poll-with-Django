@@ -4,10 +4,8 @@ from .forms import SurveyForm
 from .models import Survey
 from django.core.paginator import Paginator
 
-
 #filros survey
 #priva rotas deletar, update, list, detail
-#paginação
 
 def home(request):
     if request.method == 'POST':
@@ -18,27 +16,55 @@ def home(request):
     forms = SurveyForm()
     return render(request, 'core/home.html', {'forms':forms})
 
+
 def list_survey(request):
+    surveys = Survey.objects.all()
+    
+    #criando filtro apenas de language escolhidas
+    filter_language = []
+    for l in surveys:
+        if not l.language in filter_language:
+            filter_language.append(l.language)
+    
     if request.method == 'POST':
         search = request.POST.get('search')
+        language = request.POST.get('language')
         
-        if search:
-            surveys = Survey.objects.filter(full_name=search)
+        if language:
+            surveys = Survey.objects.filter(language=language)
+                    
             paginator = Paginator(surveys, 100)
             page = request.GET.get('page')
             data = {
                 'surveys': paginator.get_page(page),
-                'all_surveys': len(surveys)}
+                'all_surveys': len(surveys),
+                'filter_language': filter_language
+                }
+            return render(
+                request, 'core/list-survey.html', 
+                data)
+        
+        if search:
+            surveys = Survey.objects.filter(full_name=search)
+            
+            paginator = Paginator(surveys, 100)
+            page = request.GET.get('page')
+            data = {
+                'surveys': paginator.get_page(page),
+                'all_surveys': len(surveys),
+                'filter_language': filter_language
+                }
             return render(
                 request, 'core/list-survey.html', 
                 data)
     
-    surveys = Survey.objects.all()
     paginator = Paginator(surveys, 10)
     page = request.GET.get('page')
     data = {
         'surveys': paginator.get_page(page),
-        'all_surveys': len(surveys)}
+        'all_surveys': len(surveys),
+        'filter_language': filter_language
+        }
     return render(
         request, 'core/list-survey.html', 
         data)

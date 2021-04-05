@@ -1,6 +1,17 @@
 from django.db import models
 from django.db.models.expressions import F
 
+
+class Languages:
+    language_settings  = (
+        ('JS', 'JAVASCRIPT'),
+        ('PY', 'PYTHON'),
+        ('TY', 'TYPESCRIPT'),
+        ('JV', 'JAVA'),
+        ('C#', 'C#'),
+        ('RB', 'BUBY')
+    )
+
 # Create your models here.
 class Survey(models.Model):
     sex_options = (
