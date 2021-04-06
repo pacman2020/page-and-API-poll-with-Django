@@ -1,14 +1,12 @@
 from django.contrib.messages.api import error
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SurveyForm
-from .models import Survey
+from .models import Languages, Survey
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
 #criar api de apenas par lista todas pesquisa
-#estilzar tudo kkk
-#melhora seletor de languagens
 
 def home(request):
     if request.method == 'POST':
@@ -19,6 +17,27 @@ def home(request):
         return redirect('home')
     forms = SurveyForm()
     return render(request, 'core/home.html', {'forms':forms})
+
+@login_required
+def filter_languagens(request, language):
+    surveys = Survey.objects.all()
+    
+    #criando filtro apenas de language escolhidas
+    filter_language = []
+    for l in surveys:
+        if not l.language in filter_language:
+            filter_language.append(l.language)
+    
+    surveys = Survey.objects.filter(language=language)
+    paginator = Paginator(surveys, 10)
+    page = request.GET.get('page')
+    data = {
+        'surveys': paginator.get_page(page),
+        'all_surveys': len(surveys),
+        'filter_language': filter_language
+        }
+    return render(request, 'core/list-survey.html', data)
+
 
 @login_required
 def list_survey(request):
@@ -32,21 +51,6 @@ def list_survey(request):
     
     if request.method == 'POST':
         search = request.POST.get('search')
-        language = request.POST.get('language')
-        
-        if language:
-            surveys = Survey.objects.filter(language=language)
-                    
-            paginator = Paginator(surveys, 100)
-            page = request.GET.get('page')
-            data = {
-                'surveys': paginator.get_page(page),
-                'all_surveys': len(surveys),
-                'filter_language': filter_language
-                }
-            return render(
-                request, 'core/list-survey.html', 
-                data)
         
         if search:
             surveys = Survey.objects.filter(full_name=search)

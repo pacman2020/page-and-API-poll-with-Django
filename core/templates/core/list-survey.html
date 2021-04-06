@@ -10,18 +10,6 @@
 
 <!-- filtro de linguagem -->
 <div class="list-group mt-1">
-    <form type="submit" action="{% url 'list-surveys' %}" method="POST">
-      {% csrf_token %}
-      <select  name="language" >
-        <option value="" selected>selecione uma liguagem</option>
-        {% for language in filter_language %}
-        <option value="{{language}}">
-          {{language}}
-        </option>
-        {% endfor %}
-      </select>
-      <button class="btn btn-outline-success" type="submit">filtar</button>
-    </form>
 
     <!-- lista de pesquisa -->
     {% for survey in surveys %}
