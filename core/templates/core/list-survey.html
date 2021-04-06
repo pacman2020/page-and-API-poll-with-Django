@@ -4,49 +4,51 @@
 {% block content %}
 
 <!-- informação do total de pesquisas -->
-<h4 class="text-center " >total de escriçoes 
-    <span class="badge bg-primary rounded-pill">{{ all_surveys }}</span>
+<h4 class="text-center ">total de escriçoes
+  <span class="badge bg-primary rounded-pill">{{ all_surveys }}</span>
 </h4>
 
 <!-- filtro de linguagem -->
 <div class="list-group mt-1">
-  <li class="nav-item " style="list-style-type: none; " >
+  <li class="nav-item " style="list-style-type: none; ">
     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
       Languagens
     </a>
-    <ul class="dropdown-menu" >
+    <ul class="dropdown-menu">
       {% for language in filter_language %}
       <li><a class="dropdown-item" href="{% url 'filter-language' language %}">
-        {{language}}
-      </a></li>
+          {{language}}
+        </a></li>
       {% endfor %}
     </ul>
   </li>
 
-    <!-- lista de pesquisas -->
-    {% for survey in surveys %}
-    <button type="button" class="list-group-item list-group-item-action mt-3">
-        <a href="{% url 'detail-survey' survey.id %}"><h5>{{ survey.full_name }}</h5></a>
-        <p>{{ survey.email }}</p>
-    </button>
-    {% endfor %}
+  <!-- lista de pesquisas -->
+  {% for survey in surveys %}
+  <button type="button" class="list-group-item list-group-item-action mt-3">
+    <a href="{% url 'detail-survey' survey.id %}">
+      <h5>{{ survey.full_name }}</h5>
+    </a>
+    <p>{{ survey.email }}</p>
+  </button>
+  {% endfor %}
 
-    <!-- paginação -->
-    <div class="pagination d-flex justify-content-center p-3">
-        <span class="step-link">
-          {% if surveys.has_previous %}
-          <a href="?page={{ surveys.previous_page_number }}">voltar</a>
-          {% endif %}
-      
-          <span class="current">
-            {{ surveys.number }} | {{  surveys.paginator.num_pages }}
-          </span>
-      
-          {% if surveys.has_next %}
-          <a href="?page={{ surveys.next_page_number }}">proximo</a>
-          {% endif %}
-        </span>
-      </div>
+  <!-- paginação -->
+  <div class="pagination d-flex justify-content-center p-3">
+    <span class="step-link">
+      {% if surveys.has_previous %}
+      <a href="?page={{ surveys.previous_page_number }}">voltar</a>
+      {% endif %}
+
+      <span class="current">
+        {{ surveys.number }} | {{ surveys.paginator.num_pages }}
+      </span>
+
+      {% if surveys.has_next %}
+      <a href="?page={{ surveys.next_page_number }}">proximo</a>
+      {% endif %}
+    </span>
+  </div>
 </div>
 
 {% endblock %}

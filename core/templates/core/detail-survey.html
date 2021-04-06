@@ -3,7 +3,7 @@
 
 {% block content %}
 
-<div class="list-group mt-5 " >
+<div class="list-group mt-5 ">
 
     <h4>{{ survey.full_name }}</h4>
     <span>{{ survey.email }}</span>
@@ -11,12 +11,12 @@
     <span>{{ survey.sex }}</span>
     <span>{{ survey.language }}</span>
     <span>{{ survey.description }}</span>
-    <p class="justify-content-start mt-3" >
+    <p class="justify-content-start mt-3">
         <a class="btn btn-primary btn-lg" href="{% url 'update-survey' survey.id %}">
             edit
         </a>
-        <a onclick="return confirm('deseja delete survey')" 
-            class="btn btn-danger btn-lg" href="{% url 'delete-survey' survey.id %}">
+        <a onclick="return confirm('deseja delete survey')" class="btn btn-danger btn-lg"
+            href="{% url 'delete-survey' survey.id %}">
             delete
         </a>
     </p>

@@ -12,6 +12,7 @@
 </head>
 
 <body>
+  <!-- menu da pagina -->
   <nav class="navbar navbar-expand-lg navbar-dark p-5 bg-dark">
     <div class="container-fluid">
       <a class="navbar-brand" href="{% url 'home' %}">Survey Dev</a>
@@ -21,7 +22,6 @@
           <a class="nav-link" href="{% url 'list-surveys' %}">list-survey</a>
           <a class="nav-link" href="{% url 'logout' %}">logout</a>
           <a class="nav-link" href="#">{{ user.username }}</a>
-
         </div>
       </div>
     </div>
@@ -33,22 +33,22 @@
     {% endif %}
   </nav>
 
-  <!-- messages -->
+  <!-- messages sucesso ou erros -->
   {% if messages %}
-      {% for message in messages %}
-      <div class="alert alert-{{ message.tags }}" role="alert">
-          <p class="text-center fs-3" >{{ message }}</p>
-      </div>
-      {% endfor %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+      <p class="text-center fs-3">{{ message }}</p>
+    </div>
+    {% endfor %}
   {% endif %}
 
-
+  <!-- conteudo da pagina -->
   <div class="container p-3 mt-3" style="background: rgb(214, 214, 214);">
-
     {% block content %}
     {% endblock %}
   </div>
 
+  <!-- rodape da pagina -->
   <footer class="bg-dark text-white text-center p-4 mt-4">
     <p class="mt-4">email da empresa e contatos</p>
   </footer>

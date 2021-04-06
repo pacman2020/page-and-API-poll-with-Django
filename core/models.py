@@ -2,16 +2,14 @@ from django.db import models
 from django.db.models.expressions import F
 
 
-
-# Create your models here.
 class Survey(models.Model):
     sex_options = (
         ('F', 'FEMININO'),
         ('M', 'MASCULINO'),
         ('O', 'OUTROS')
     )
-    
-    language_settings  = (
+
+    language_settings = (
         ('JS', 'JAVASCRIPT'),
         ('PY', 'PYTHON'),
         ('TY', 'TYPESCRIPT'),
@@ -19,7 +17,7 @@ class Survey(models.Model):
         ('C#', 'C#'),
         ('RB', 'BUBY')
     )
-    
+
     full_name = models.CharField(max_length=100)
     email = models.EmailField()
     phone = models.CharField(max_length=11)
@@ -30,6 +28,6 @@ class Survey(models.Model):
     description = models.TextField()
     active = models.BooleanField(default=True)
     begin_date = models.DateTimeField(auto_now_add=True)
-    
+
     def __str__(self):
         return self.full_name
