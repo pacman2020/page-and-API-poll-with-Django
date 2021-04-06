@@ -1,5 +1,5 @@
 from django.urls import path
-from core.ApiView.views import SurveyView
+from core.ApiView.views import SurveyGet, SurveyView
 from .views import (
     filter_languagens,
     home, 
@@ -17,4 +17,5 @@ urlpatterns = [
     path('update/<int:pk>/', update_survey, name='update-survey'),
     path('delete/<int:pk>/', delete_survey, name='delete-survey'),
     path('api/', SurveyView.as_view()),
+    path('api/<int:pk>', SurveyGet.as_view()),
 ]
