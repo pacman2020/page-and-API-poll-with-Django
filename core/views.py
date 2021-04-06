@@ -1,7 +1,7 @@
 from django.contrib.messages.api import error
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import SurveyForm
-from .models import Languages, Survey
+from .models import  Survey
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -37,7 +37,6 @@ def filter_languagens(request, language):
         'filter_language': filter_language
         }
     return render(request, 'core/list-survey.html', data)
-
 
 @login_required
 def list_survey(request):

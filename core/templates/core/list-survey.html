@@ -10,8 +10,20 @@
 
 <!-- filtro de linguagem -->
 <div class="list-group mt-1">
+  <li class="nav-item " style="list-style-type: none; " >
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+      Languagens
+    </a>
+    <ul class="dropdown-menu" >
+      {% for language in filter_language %}
+      <li><a class="dropdown-item" href="{% url 'filter-language' language %}">
+        {{language}}
+      </a></li>
+      {% endfor %}
+    </ul>
+  </li>
 
-    <!-- lista de pesquisa -->
+    <!-- lista de pesquisas -->
     {% for survey in surveys %}
     <button type="button" class="list-group-item list-group-item-action mt-3">
         <a href="{% url 'detail-survey' survey.id %}"><h5>{{ survey.full_name }}</h5></a>
